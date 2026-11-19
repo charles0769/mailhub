@@ -22,6 +22,9 @@
   },
   "productName": "MailHub",
   "devDependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/core": "^8.6.2",
     "electron": "^33.2.0",
     "electron-builder": "^26.18.0"
   },
