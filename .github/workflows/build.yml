@@ -70,8 +70,6 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - uses: android-actions/setup-android@v3
-
       - name: Add Capacitor Android platform
         run: |
           npx cap add android
