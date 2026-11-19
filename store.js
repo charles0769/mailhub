@@ -1,6 +1,11 @@
 // store.js — 纯 JS JSON 存储（零原生依赖，个人邮箱场景：全量内存 + 落盘）
+// 数据目录优先级: MAILHUB_DATA_DIR 环境变量 > 应用目录（源码/服务器部署）
+// Electron 打包后由 electron/main.js 设置 MAILHUB_DATA_DIR 到用户数据目录（asar 包内只读）
 const fs = require('fs');
-const DB_FILE = __dirname + '/mailhub.json';
+const path = require('path');
+const DATA_DIR = process.env.MAILHUB_DATA_DIR || __dirname;
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+const DB_FILE = path.join(DATA_DIR, 'mailhub.json');
 
 let data = { accounts: [], mails: [], outbox: [], seq: { accounts: 1, mails: 1, outbox: 1 } };
 try {

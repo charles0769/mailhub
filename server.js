@@ -19,7 +19,7 @@ const db = require('./store.js');
 
 const app = express();
 app.use(express.json());
-app.use(express.static('public', { etag: false, lastModified: false, setHeaders: function(res) { res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); } }));
+app.use(express.static(require('path').join(__dirname, 'public'), { etag: false, lastModified: false, setHeaders: function(res) { res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); } }));
 
 // 厂商预设
 var PROVIDERS = {

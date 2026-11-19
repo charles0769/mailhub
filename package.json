@@ -1,18 +1,80 @@
 {
   "name": "mailhub",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "多厂商邮件聚合客户端（IMAP 收 / SMTP 发）— 自部署，支持 163/QQ/Gmail/Outlook 等 11 家邮箱",
+  "main": "electron/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "electron:dev": "electron .",
+    "dist": "electron-builder --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist:linux": "electron-builder --linux --publish never",
+    "dist:mac": "electron-builder --mac --publish never"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "charles0769",
+  "license": "MIT",
   "dependencies": {
     "express": "^5.3.0",
     "imapflow": "^2.12.1",
     "mailparser": "^3.14.5",
     "nodemailer": "^10.6.0"
+  },
+  "productName": "MailHub",
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.charles0769.mailhub",
+    "productName": "MailHub",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build-resources"
+    },
+    "files": [
+      "electron/**",
+      "server.js",
+      "store.js",
+      "public/**",
+      "package.json",
+      "node_modules/**"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build-resources/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "MailHub"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
+      "category": "Network;Email",
+      "icon": "build-resources/icon.png",
+      "maintainer": "charles0769"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "build-resources/icon.png",
+      "category": "public.app-category.productivity",
+      "identity": null
+    }
   }
 }

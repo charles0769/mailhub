@@ -1,0 +1,13 @@
+{
+  "appId": "com.charles0769.mailhub",
+  "appName": "MailHub",
+  "webDir": "public",
+  "server": {
+    "url": "http://192.168.1.100:18090",
+    "cleartext": true,
+    "androidScheme": "http"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
